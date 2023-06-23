@@ -42,13 +42,24 @@ languages.get('/seed', (req, res) => {
         })
 })
 
-// Index:
-languages.get('/', (req, res) => {
-    Language.find()
-        .then(foundLanguages => {
-            res.json(foundLanguages)
+// // Index:
+// languages.get('/', (req, res) => {
+//     Language.find()
+//         .then(foundLanguages => {
+//             res.json(foundLanguages)
+//         })
+// })
+
+languages.get('/seed', (req, res) => {
+    Language.insertMany([ languages ])
+        .then(createdLanguages => {
+            res.json({
+                message: "Seed successful!"
+            })
         })
 })
+
+
 
 // Show:
 languages.get('/:name', (req, res) => {
@@ -57,3 +68,5 @@ languages.get('/:name', (req, res) => {
             res.json(foundLanguage)
         })
 })
+
+
